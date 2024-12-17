@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Staff Dashboard</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* Container to center everything */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Card Layout for Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .section table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        .section th, .section td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .section th {
+            background-color: #f2f2f2;
+        }
+
+        /* Styling Links */
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Office Staff Dashboard</h1>
+
+        <!-- Student Details Section -->
+        <div class="section">
+            <h2>Student Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.roll_number }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Fees History Section -->
+        <div class="section">
+            <h2>Fees History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Fee Type</th>
+                        <th>Amount</th>
+                        <th>Payment Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fee in fees_history %}
+                        <tr>
+                            <td>{{ fee.student.name }}</td>
+                            <td>{{ fee.fee_type }}</td>
+                            <td>{{ fee.amount }}</td>
+                            <td>{{ fee.payment_date }}</td>
+                            <td>
+                                <a href="{% url 'edit_fee' fee.id %}">Edit</a> |
+                                <a href="{% url 'delete_fee' fee.id %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'add_fee' %}" class="btn">Add New Fee Record</a>
+        </div>
+
+        <!-- Library Records Section -->
+        <div class="section">
+            <h2>Library Records</h2>
+            <ul>
+                {% for record in library_records %}
+                    <li>{{ record.book_name }} - {{ record.status }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Logout Link -->
+        <div class="section">
+            <a href="{% url 'logout' %}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 School Management System. All rights reserved.
+    </footer>
+
+</body>
+</html>

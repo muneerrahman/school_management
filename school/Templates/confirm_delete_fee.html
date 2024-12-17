@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Deletion</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/static.css' %}">
+</head>
+<body>
+    <h1>Are you sure you want to delete this fee record?</h1>
+
+    <p><strong>Fee Type:</strong> {{ fee.fee_type }}</p>
+    <p><strong>Amount:</strong> {{ fee.amount }}</p>
+    <p><strong>Payment Date:</strong> {{ fee.payment_date }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, delete it</button>
+    </form>
+
+    <a href="{% url 'office_staff_dashboard' %}">Cancel</a>
+</body>
+</html>

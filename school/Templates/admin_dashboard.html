@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/static.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Admin Dashboard</h1><br>
+
+        <!-- Button to register a new user -->
+        <a href="{% url 'register_user' %}">
+            <button type="button">Register New User</button>
+        </a><br><br>
+        <a href="{% url 'manage_users' %}">Manage Users</a><br><br>
+        <a href="{% url 'office_staff_dashboard' %}">Go to Office Staff Dashboard</a><br><br>
+        <a href="{% url 'librarian_dashboard' %}">Go to Librarian Dashboard</a>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <br><br><a href="{% url 'logout' %}">Logout</a>
+    </div>
+</body>
+</html>

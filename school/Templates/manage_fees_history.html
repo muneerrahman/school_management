@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Fees History</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/static.css' %}">
+</head>
+<body>
+    <h1>Manage Fees History</h1>
+    
+    <ul>
+        {% for fee in fees_history %}
+            <li>{{ fee.student }} - {{ fee.amount }} - {{ fee.date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
